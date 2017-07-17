@@ -17,11 +17,19 @@ import jade.lang.acl.MessageTemplate;
 public class WorkerAgent extends Agent {
 	private static final long serialVersionUID = -5061150948321398390L;
 
+	/*
+	 * This method is called when Agent is created.
+	 */
 	@Override
 	protected void setup() {
+		/* add Behaviour that scheduled every 2000 miliseconds */
 		addBehaviour(new PeriodicLookForActivePrinterRequest(this, 2000));
 	}
 
+	/*
+	 * this Behaviour periodically asks DF-Agent for agents providing "printing"
+	 * service. and if it finds some it starts LookForActivePrinterRequest Behaviour
+	 */
 	class PeriodicLookForActivePrinterRequest extends TickerBehaviour {
 		private static final long serialVersionUID = 2543990340935580665L;
 
@@ -42,15 +50,22 @@ public class WorkerAgent extends Agent {
 		}
 
 		private List<AID> findAgents(String serviceName) {
+			/* prepare service-search template */
 			ServiceDescription requiredService = new ServiceDescription();
 			requiredService.setName(serviceName);
+			/*
+			 * prepare agent-search template. agent-search template can have several
+			 * service-search templates
+			 */
 			DFAgentDescription agentDescriptionTemplate = new DFAgentDescription();
 			agentDescriptionTemplate.addServices(requiredService);
 
 			List<AID> foundAgents = new ArrayList<AID>();
 			try {
+				/* perform request to DF-Agent */
 				DFAgentDescription[] agentDescriptions = DFService.search(myAgent, agentDescriptionTemplate);
 				for (DFAgentDescription agentDescription : agentDescriptions) {
+					/* store all found agents in an array for further processing */
 					foundAgents.add(agentDescription.getName());
 				}
 			} catch (FIPAException exception) {
@@ -61,10 +76,16 @@ public class WorkerAgent extends Agent {
 		}
 	}
 
+	/* possible states of request */
 	private static enum RequestState {
 		PREPARE_CALL_FOR_PROPOSAL, HANDLE_CALL_FOR_PROPOSAL_REPLY, PREPARE_ACCEPT_PROPOSAL, HANDLE_ACCEPT_PROPOSAL_REPLY, DONE
 	};
 
+	/*
+	 * this behaviour handles process of sending call for proposal to printers,
+	 * gathering their proposals and accepting one of them. in order to implement
+	 * this all in single behaviour state-mechanics implemented
+	 */
 	class LookForActivePrinterRequest extends Behaviour {
 		private static final long serialVersionUID = 55516044843165611L;
 
@@ -73,6 +94,7 @@ public class WorkerAgent extends Agent {
 
 		public LookForActivePrinterRequest(List<AID> printerAgents) {
 			this.printerAgents = printerAgents;
+			/* initial state for behaviour */
 			this.requestState = RequestState.PREPARE_CALL_FOR_PROPOSAL;
 		}
 
@@ -86,6 +108,7 @@ public class WorkerAgent extends Agent {
 		public void action() {
 			ACLMessage msg = null;
 
+			/* perform actions accordingly to behaviour state */
 			switch (requestState) {
 			case PREPARE_CALL_FOR_PROPOSAL:
 				msg = new ACLMessage(ACLMessage.CFP);
@@ -159,6 +182,7 @@ public class WorkerAgent extends Agent {
 
 		@Override
 		public boolean done() {
+			/* behaviour is finished when it reaches DONE state */
 			return requestState == RequestState.DONE;
 		}
 	}

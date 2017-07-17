@@ -21,10 +21,20 @@ public class LoggerAgent extends Agent {
 
 		@Override
 		public void action() {
+			/*
+			 * receive() call gets first message from message-queue that matches given
+			 * template, if there is no message it returns null
+			 */
 			ACLMessage msg = myAgent.receive(messageTemplate);
 			if (msg != null) {
+				/* when there is message agent outputs its content to Console */
 				System.out.println(msg.getContent());
 			} else {
+				/*
+				 * block() call puts behaviour to blocked-state until there is message in
+				 * message-queue. this method is used to remove Behaviour from scheduling queue
+				 * to prevent idling.
+				 */
 				block();
 			}
 		}

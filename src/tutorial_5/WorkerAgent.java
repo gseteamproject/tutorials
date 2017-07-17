@@ -28,13 +28,20 @@ import jade.proto.ContractNetInitiator;
 public class WorkerAgent extends Agent {
 	private static final long serialVersionUID = -5061150948321398390L;
 
+	/* to form String representation SLCodec will be used */
 	private Codec codec = new SLCodec();
+
+	/* serialization/deserialization will be based on office ontology */
 	private Ontology ontology = OfficeOntology.getInstance();
 
 	@Override
 	protected void setup() {
 		addBehaviour(new PeriodicLookForActivePrinterRequest(this, 2000));
 
+		/*
+		 * codec and ontology must be registered as supported by agent. agent can
+		 * support multiple codecs and ontologies
+		 */
 		getContentManager().registerLanguage(codec);
 		getContentManager().registerOntology(ontology);
 	}
@@ -95,6 +102,7 @@ public class WorkerAgent extends Agent {
 		protected Vector prepareCfps(ACLMessage cfp) {
 			cfp = new ACLMessage(ACLMessage.CFP);
 
+			// begin
 			Document document = new Document("document " + new Random().nextInt());
 			PrintingPrice printingPrice = new PrintingPrice();
 			printingPrice.setDocument(document);
@@ -105,6 +113,7 @@ public class WorkerAgent extends Agent {
 			} catch (CodecException | OntologyException e) {
 				e.printStackTrace();
 			}
+			// end
 
 			cfp.setProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET);
 			cfp.setReplyByDate(new Date(System.currentTimeMillis() + 1000));
@@ -123,6 +132,7 @@ public class WorkerAgent extends Agent {
 			for (int i = 0; i < responses.size(); i++) {
 				ACLMessage response = (ACLMessage) responses.get(i);
 				if (response.getPerformative() == ACLMessage.PROPOSE) {
+					// begin
 					ContentManager cm = myAgent.getContentManager();
 					Predicate p = null;
 					try {
@@ -139,12 +149,14 @@ public class WorkerAgent extends Agent {
 						bestOffer = i;
 						bestPrice = price;
 					}
+					// end
 				}
 			}
 			for (int i = 0; i < responses.size(); i++) {
 				ACLMessage response = (ACLMessage) responses.get(i);
 				ACLMessage accept = response.createReply();
 
+				// begin
 				ContentManager cm = myAgent.getContentManager();
 				Predicate p = null;
 				try {
@@ -166,6 +178,7 @@ public class WorkerAgent extends Agent {
 				} catch (CodecException | OntologyException e) {
 					e.printStackTrace();
 				}
+				// end
 
 				if (i == bestOffer) {
 					accept.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
@@ -178,6 +191,7 @@ public class WorkerAgent extends Agent {
 
 		@Override
 		protected void handleInform(ACLMessage inform) {
+			// begin
 			ContentManager cm = myAgent.getContentManager();
 			Action a = null;
 			try {
@@ -186,6 +200,7 @@ public class WorkerAgent extends Agent {
 				e.printStackTrace();
 			}
 			Print print = (Print) a.getAction();
+			// end
 
 			System.out.println(String.format("%s printed (price=%d)", print.getDocument().getName(), bestPrice));
 		}

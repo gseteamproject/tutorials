@@ -25,7 +25,10 @@ import jade.proto.ContractNetResponder;
 public class PrinterAgent extends Agent {
 	private static final long serialVersionUID = -7418692714860762106L;
 
+	/* to form String representation SLCodec will be used */
 	private Codec codec = new SLCodec();
+
+	/* serialization/deserialization will be based on office ontology */
 	private Ontology ontology = OfficeOntology.getInstance();
 
 	@Override
@@ -44,6 +47,10 @@ public class PrinterAgent extends Agent {
 
 		addBehaviour(new PrinterNetResponder(this));
 
+		/*
+		 * codec and ontology must be registered as supported by agent. agent can
+		 * support multiple codecs and ontologies
+		 */
 		getContentManager().registerLanguage(codec);
 		getContentManager().registerOntology(ontology);
 	}
@@ -69,6 +76,8 @@ public class PrinterAgent extends Agent {
 			ACLMessage reply = cfp.createReply();
 			reply.setPerformative(ACLMessage.PROPOSE);
 
+			/* content slot handling based on ontology mechanic */
+			// begin
 			ContentManager cm = myAgent.getContentManager();
 			Predicate p = null;
 			try {
@@ -90,6 +99,7 @@ public class PrinterAgent extends Agent {
 			} catch (CodecException | OntologyException e) {
 				e.printStackTrace();
 			}
+			// end
 
 			System.out.println(String.format("my price is %d", price));
 			return reply;
@@ -102,6 +112,7 @@ public class PrinterAgent extends Agent {
 			inform.setPerformative(ACLMessage.INFORM);
 			inform.setContent(accept.getContent());
 
+			// begin
 			ContentManager cm = myAgent.getContentManager();
 			Action a = null;
 			try {
@@ -110,6 +121,7 @@ public class PrinterAgent extends Agent {
 				e.printStackTrace();
 			}
 			Print print = (Print) a.getAction();
+			// end
 
 			System.out.println(String.format("printing %s ...", print.getDocument().getName()));
 			return inform;
