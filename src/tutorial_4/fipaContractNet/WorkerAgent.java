@@ -1,4 +1,4 @@
-package tutorial_4;
+package tutorial_4.fipaContractNet;
 
 import java.util.ArrayList;
 import java.util.Date;
