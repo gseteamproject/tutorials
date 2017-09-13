@@ -20,8 +20,7 @@ public class Tutorial {
 		 * There we will use "-gui" parameter that orders to run JADE Remote Management
 		 * Agent.
 		 */
-		String[] parameters = new String[1];
-		parameters[0] = "-gui";
+		String[] parameters = new String[] { "-gui" };
 
 		/* Pass array with parameters as argument of Boot.main() method */
 		Boot.main(parameters);
