@@ -1,4 +1,4 @@
-package tutorial_6;
+package tutorial_1;
 
 import jade.Boot;
 
