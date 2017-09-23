@@ -14,7 +14,8 @@ public class MainContainer {
 	 * It's better to use URIs not an IP addresses cause it allows more flexibility
 	 */
 	public static void main(String[] args) {
-		String[] parameters = new String[] { "-gui",
+		String[] parameters = new String[] {
+				"-gui",
 				// "-host", "192.168.100.11",
 				"a1:jade.core.Agent;" };
 		Boot.main(parameters);
