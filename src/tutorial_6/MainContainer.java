@@ -16,7 +16,7 @@ public class MainContainer {
 	public static void main(String[] args) {
 		String[] parameters = new String[] { "-gui",
 				// "-host", "192.168.100.11",
-				"dummy1:tutorial_6.EmptyAgent;" };
+				"a1:jade.core.Agent;" };
 		Boot.main(parameters);
 	}
 }
