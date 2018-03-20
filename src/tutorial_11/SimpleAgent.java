@@ -28,13 +28,13 @@ public class SimpleAgent extends Agent {
 
 		/* We add Behaviors that Agent is doing */
 		addBehaviour(new SimpleAgentBehaviour());
-		addBehaviour(new SimpleAgentOneShotBehaviour());
+//		addBehaviour(new SimpleAgentOneShotBehaviour());
 		addBehaviour(new SimpleAgentCyclicBehaviour());
-		addBehaviour(new SimpleAgentTickerBehaviour(this, 1000));
-		addBehaviour(new SimpleAgentWakerBehaviour(this, 2000));
-		addBehaviour(new SimpleAgentSequentialBehaviour());
-		addBehaviour(new SimpleAgentParallelBehaviour(this, ParallelBehaviour.WHEN_ANY));
-		addBehaviour(new SimpleAgentFSMBehaviour());
+//		addBehaviour(new SimpleAgentTickerBehaviour(this, 1000));
+//		addBehaviour(new SimpleAgentWakerBehaviour(this, 2000));
+//		addBehaviour(new SimpleAgentSequentialBehaviour());
+//		addBehaviour(new SimpleAgentParallelBehaviour(this, ParallelBehaviour.WHEN_ANY));
+//		addBehaviour(new SimpleAgentFSMBehaviour());
 	}
 
 	/*

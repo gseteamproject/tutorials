@@ -19,12 +19,12 @@ public class PeripheralContainer {
 	 */
 	public static void main(String[] args) {
 		String[] parameters = new String[] { 
-				"-container",
-				"-detect-main", "true", 
-				"-name", "*",
-				// "-host", "192.168.100.11",
-				// "-local-host", "192.168.100.14",
-				"a2:jade.core.Agent;" };
+			"-container",
+			"-detect-main", "true", 
+			"-name", "*",
+			// "-host", "192.168.100.11",
+			// "-local-host", "192.168.100.14",
+			"a2:jade.core.Agent;" };
 		Boot.main(parameters);
 	}
 }

@@ -26,7 +26,7 @@ public class Tutorial {
 		 */
 		String[] parameters = new String[2];
 		parameters[0] = "-gui";
-		parameters[1] = "agent:tutorial_1.SimpleAgent";
+		parameters[1] = "agent:tutorial_11.SimpleAgent";
 		Boot.main(parameters);
 	}
 }
