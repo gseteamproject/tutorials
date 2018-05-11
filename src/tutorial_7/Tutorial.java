@@ -5,7 +5,7 @@ import jade.Boot;
 public class Tutorial {
 	/*
 	 * This example shows how to work with ontologies. It is based on example in
-	 * tutorial_4.
+	 * tutorial_5.
 	 * 
 	 * The idea is that as useful information is transfered in "content" slot of
 	 * message it is represented as String. So the information must be somehow

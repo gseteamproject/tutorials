@@ -5,7 +5,7 @@ import jade.Boot;
 public class Tutorial {
 	/*
 	 * This examples shows how to work with interaction protocols. It is based on
-	 * example in tutorial_4. All state handling mechanics replaced with
+	 * example in tutorial_5. All state handling mechanics replaced with
 	 * Contract-Net interaction protocol. Printer agent acts as responder and worker
 	 * agent acts as initiator.
 	 * 
