@@ -1,4 +1,4 @@
-package tutorial_41.fipaSubscribe;
+package tutorial_6.fipaSubscribe;
 
 import java.util.HashMap;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package tutorial_5;
+package tutorial_7;
 
 import jade.content.onto.BasicOntology;
 import jade.content.onto.Ontology;

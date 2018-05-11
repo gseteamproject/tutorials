@@ -4,35 +4,21 @@ import jade.Boot;
 
 public class Tutorial {
 	/*
-	 * This examples shows how to receive and send messages.
+	 * This examples shows how to work with catalog of services.
 	 * 
-	 * At startup Logger, Listener and Sniffer agents are created. Listener is
-	 * waiting for all incoming messages. When it receives message it sends it to
-	 * Logger. Logger is waiting for incoming messages that only have specified
-	 * "conversationId". When it receives message it outputs its "content" to
-	 * console. Sniffer is special JADE platform agent that traces all messages that
-	 * are transmitted by selected agents.
+	 * At startup two Printers and one Worker agents are created. Printers register
+	 * themselves as "printing" service providers in DF-Agent. Worker periodically
+	 * asks DF-Agent for agents providing "printing" service and receives all agents
+	 * that providing this service as a response. Worker than sends offer for these
+	 * agents and selects that one who provides best price.
 	 * 
-	 * To run scenario properly Right-click on a Listener agent, select Send-Message
-	 * from context menu, fill "content" slot and press Send.
-	 * 
-	 * All messages transmitted by Logger and Listener appears in Sniffer
-	 * trace-window.
+	 * In this example most of mechanics programmed manually. In next examples more
+	 * framework features will be used.
 	 */
 	public static void main(String[] args) {
-		/*
-		 * Preparing startup-parameters for JADE Platform.
-		 * 
-		 * There we start platform with three agents. First agent's name is listener,
-		 * its class is tutorial_4.ListenerAgent. Second agent's name is logger, its
-		 * class is tutorial_4.LoggerAgent. The last one is sniffer, its class is
-		 * jade.tools.sniffer.Sniffer, its parameter is "l*", which tells sniffer to
-		 * trace all agents whose name starts with "l".
-		 */
 		String[] parameters = new String[2];
 		parameters[0] = "-gui";
-		parameters[1] = "listener:tutorial_4.ListenerAgent;" + "logger:tutorial_4.LoggerAgent;"
-				+ "sniffer:jade.tools.sniffer.Sniffer(l*);";
+		parameters[1] = "printer1:tutorial_4.PrinterAgent;printer2:tutorial_4.PrinterAgent;worker:tutorial_4.WorkerAgent;";
 		Boot.main(parameters);
 	}
 }

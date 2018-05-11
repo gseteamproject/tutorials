@@ -1,4 +1,4 @@
-package tutorial_41.fipaRequest;
+package tutorial_6.fipaRequest;
 
 import jade.core.Agent;
 import jade.domain.FIPANames;

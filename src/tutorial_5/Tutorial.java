@@ -4,31 +4,35 @@ import jade.Boot;
 
 public class Tutorial {
 	/*
-	 * This example shows how to work with ontologies. It is based on example in
-	 * tutorial_4.
+	 * This examples shows how to receive and send messages.
 	 * 
-	 * The idea is that as useful information is transfered in "content" slot of
-	 * message it is represented as String. So the information must be somehow
-	 * serialised/deserialised to/from String representation. And as one group of
-	 * developers can have an agreement of how to do this. Other group can have
-	 * different opinion.
+	 * At startup Logger, Listener and Sniffer agents are created. Listener is
+	 * waiting for all incoming messages. When it receives message it sends it to
+	 * Logger. Logger is waiting for incoming messages that only have specified
+	 * "conversationId". When it receives message it outputs its "content" to
+	 * console. Sniffer is special JADE platform agent that traces all messages that
+	 * are transmitted by selected agents.
 	 * 
-	 * Example: Animal { name = "lucy", species = "cat" }
+	 * To run scenario properly Right-click on a Listener agent, select Send-Message
+	 * from context menu, fill "content" slot and press Send.
 	 * 
-	 * XML representation: <animal><name>lucy</name><species>cat</species></animal>
-	 * 
-	 * JSON representation: {"animal":{"name":"lucy","species":"cat"}}
-	 * 
-	 * 
-	 * Ontology requires semantic analyze of problem area
-	 * 
-	 * Video for communication of different systems based on ontology
-	 * [russian-language] https://www.youtube.com/watch?v=yO_KDo36ZEU
+	 * All messages transmitted by Logger and Listener appears in Sniffer
+	 * trace-window.
 	 */
 	public static void main(String[] args) {
+		/*
+		 * Preparing startup-parameters for JADE Platform.
+		 * 
+		 * There we start platform with three agents. First agent's name is listener,
+		 * its class is tutorial_5.ListenerAgent. Second agent's name is logger, its
+		 * class is tutorial_5.LoggerAgent. The last one is sniffer, its class is
+		 * jade.tools.sniffer.Sniffer, its parameter is "l*", which tells sniffer to
+		 * trace all agents whose name starts with "l".
+		 */
 		String[] parameters = new String[2];
 		parameters[0] = "-gui";
-		parameters[1] = "printer1:tutorial_5.PrinterAgent;printer2:tutorial_5.PrinterAgent;worker:tutorial_5.WorkerAgent;";
+		parameters[1] = "listener:tutorial_5.ListenerAgent;" + "logger:tutorial_5.LoggerAgent;"
+				+ "sniffer:jade.tools.sniffer.Sniffer(l*);";
 		Boot.main(parameters);
 	}
 }

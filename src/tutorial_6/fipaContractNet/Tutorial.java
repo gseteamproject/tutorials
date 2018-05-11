@@ -1,11 +1,11 @@
-package tutorial_41.fipaContractNet;
+package tutorial_6.fipaContractNet;
 
 import jade.Boot;
 
 public class Tutorial {
 	/*
 	 * This examples shows how to work with interaction protocols. It is based on
-	 * example in tutorial_3. All state handling mechanics replaced with
+	 * example in tutorial_4. All state handling mechanics replaced with
 	 * Contract-Net interaction protocol. Printer agent acts as responder and worker
 	 * agent acts as initiator.
 	 * 
@@ -32,7 +32,7 @@ public class Tutorial {
 	public static void main(String[] args) {
 		String[] parameters = new String[2];
 		parameters[0] = "-gui";
-		parameters[1] = "printer1:tutorial_41.fipaContractNet.PrinterAgent;printer2:tutorial_41.fipaContractNet.PrinterAgent;worker:tutorial_41.fipaContractNet.WorkerAgent;";
+		parameters[1] = "printer1:tutorial_6.fipaContractNet.PrinterAgent;printer2:tutorial_6.fipaContractNet.PrinterAgent;worker:tutorial_6.fipaContractNet.WorkerAgent;";
 		Boot.main(parameters);
 	}
 }

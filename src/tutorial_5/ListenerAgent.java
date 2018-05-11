@@ -1,4 +1,4 @@
-package tutorial_4;
+package tutorial_5;
 
 import jade.core.AID;
 import jade.core.Agent;

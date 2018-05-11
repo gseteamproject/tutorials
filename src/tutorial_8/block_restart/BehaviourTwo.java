@@ -1,4 +1,4 @@
-package tutorial_7.block_restart;
+package tutorial_8.block_restart;
 
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.SimpleBehaviour;
