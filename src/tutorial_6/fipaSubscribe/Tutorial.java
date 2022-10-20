@@ -1,8 +1,6 @@
 package tutorial_6.fipaSubscribe;
 
 import jade.Boot;
-import tutorial_6.fipaSubscribe.InitiatorAgent;
-import tutorial_6.fipaSubscribe.ResponderAgent;
 
 public class Tutorial {
 	public static void main(String[] args) {
